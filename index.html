@@ -1,0 +1,3855 @@
+     <!DOCTYPE html>
+     <html lang="bn">
+     <head>
+     <meta charset="UTF-8">
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+     <title>নাগরিক তথ্য প্রতিবেদন</title>
+
+     <style>
+
+     :root{
+     --primary:#1769e0;
+     --primary-dark:#0f4fb7;
+     --success:#0f9d72;
+     --danger:#d92d20;
+
+     --bg:#f4f7fb;
+     --card:#ffffff;
+     --text:#172033;
+     --muted:#667085;
+     --border:#e2e8f0;
+
+     --radius:20px;
+     --shadow:0 18px 55px rgba(16,35,70,.10);
+     }
+
+     *{
+     margin:0;
+     padding:0;
+     box-sizing:border-box;
+     }
+
+     html{
+     scroll-behavior:smooth;
+     }
+
+     body{
+     background:
+          linear-gradient(135deg,#f7f9fc,#eef4ff);
+
+     color:var(--text);
+
+     font-family:
+          system-ui,
+          -apple-system,
+          "Segoe UI",
+          "Noto Sans Bengali",
+          "Noto Sans",
+          sans-serif;
+
+     line-height:1.6;
+     }
+
+     button,
+     input,
+     select,
+     textarea{
+     font:inherit;
+     }
+
+     button{
+     cursor:pointer;
+     }
+
+
+     /* ========================================
+     CONTAINER
+     ======================================== */
+
+     .container{
+     width:min(1180px,calc(100% - 30px));
+     margin:auto;
+     padding:25px 0 15px;
+     }
+
+
+     /* ========================================
+     HERO
+     ======================================== */
+
+     .hero{
+     position:relative;
+     overflow:hidden;
+
+     padding:38px;
+
+     border-radius:28px;
+
+     color:white;
+
+     background:
+          linear-gradient(
+               135deg,
+               #0d47a1,
+               #1769e0 55%,
+               #4c8df5
+          );
+
+     box-shadow:var(--shadow);
+     }
+
+     .hero::after{
+     content:"";
+
+     position:absolute;
+
+     width:320px;
+     height:320px;
+
+     border-radius:50%;
+
+     right:-130px;
+     top:-150px;
+
+     background:rgba(255,255,255,.10);
+     }
+
+     .hero-badge{
+     display:inline-flex;
+
+     padding:7px 13px;
+
+     border:1px solid rgba(255,255,255,.25);
+
+     border-radius:50px;
+
+     background:rgba(255,255,255,.10);
+
+     font-size:13px;
+     }
+
+     .hero h1{
+     margin-top:17px;
+
+     font-size:
+          clamp(28px,4vw,43px);
+
+     line-height:1.2;
+     }
+
+     .hero p{
+     max-width:800px;
+
+     margin-top:12px;
+
+     color:#eaf2ff;
+
+     line-height:1.8;
+     }
+
+
+     /* ========================================
+     NOTICE
+     ======================================== */
+
+     .notice{
+     margin-top:18px;
+
+     padding:16px 18px;
+
+     border:1px solid #dbe7fb;
+
+     border-radius:16px;
+
+     background:#f8fbff;
+
+     color:#42526b;
+     }
+
+
+     /* ========================================
+     STEPPER
+     ======================================== */
+
+     .stepper{
+     display:grid;
+
+     grid-template-columns:
+          repeat(5,1fr);
+
+     gap:10px;
+
+     margin:22px 0 10px;
+     }
+
+     .step{
+     padding:13px 8px;
+
+     text-align:center;
+
+     border:1px solid var(--border);
+
+     border-radius:15px;
+
+     background:white;
+
+     color:var(--muted);
+
+     font-size:13px;
+
+     transition:.25s;
+     }
+
+     .step.active{
+     color:var(--primary);
+
+     border-color:#8db7ff;
+
+     background:#edf4ff;
+
+     font-weight:800;
+
+     transform:translateY(-2px);
+     }
+
+     .step.completed{
+     color:var(--success);
+
+     border-color:#bde7d9;
+
+     background:#eefaf6;
+     }
+
+
+     /* ========================================
+     PROGRESS
+     ======================================== */
+
+     .progress{
+     height:6px;
+
+     margin-bottom:18px;
+
+     border-radius:50px;
+
+     overflow:hidden;
+
+     background:#e6edf7;
+     }
+
+     .progress-bar{
+     width:20%;
+
+     height:100%;
+
+     background:
+          linear-gradient(
+               90deg,
+               var(--primary),
+               #65a0ff
+          );
+
+     transition:.3s;
+     }
+
+
+     /* ========================================
+     CARD
+     ======================================== */
+
+     .card{
+     padding:28px;
+
+     margin-bottom:18px;
+
+     border:1px solid var(--border);
+
+     border-radius:var(--radius);
+
+     background:var(--card);
+
+     box-shadow:var(--shadow);
+     }
+
+
+     /* ========================================
+     FORM SECTION
+     ======================================== */
+
+     .form-section{
+     display:none;
+     }
+
+     .form-section.active{
+     display:block;
+
+     animation:
+          sectionIn .3s ease;
+     }
+
+     @keyframes sectionIn{
+
+     from{
+          opacity:0;
+          transform:translateY(10px);
+     }
+
+     to{
+          opacity:1;
+          transform:none;
+     }
+
+     }
+
+
+     /* ========================================
+     SECTION HEADER
+     ======================================== */
+
+     .section-header{
+     display:flex;
+
+     justify-content:space-between;
+
+     align-items:flex-start;
+
+     gap:20px;
+
+     margin-bottom:25px;
+     }
+
+     .section-header h2{
+     font-size:24px;
+
+     margin-bottom:5px;
+     }
+
+     .section-header p{
+     color:var(--muted);
+
+     font-size:14px;
+     }
+
+
+     /* ========================================
+     GRID
+     ======================================== */
+
+     .form-grid{
+     display:grid;
+
+     grid-template-columns:
+          repeat(2,minmax(0,1fr));
+
+     gap:18px;
+     }
+
+     .full{
+     grid-column:1/-1;
+     }
+
+
+     /* ========================================
+     FIELD
+     ======================================== */
+
+     .form-group label{
+     display:block;
+
+     margin-bottom:8px;
+
+     font-size:14px;
+
+     font-weight:750;
+     }
+
+     .required{
+     color:var(--danger);
+     }
+
+     .form-control{
+     width:100%;
+
+     padding:13px 14px;
+
+     border:1px solid #d7dfeb;
+
+     border-radius:13px;
+
+     outline:none;
+
+     background:#fbfcfe;
+
+     color:var(--text);
+
+     transition:.2s;
+     }
+
+     .form-control:focus{
+     border-color:#75a7ff;
+
+     background:white;
+
+     box-shadow:
+          0 0 0 4px #eaf2ff;
+     }
+
+     textarea.form-control{
+     min-height:135px;
+
+     resize:vertical;
+     }
+
+     .help-text{
+     margin-top:6px;
+
+     color:var(--muted);
+
+     font-size:12px;
+     }
+
+
+     /* ========================================
+     LOCATION
+     ======================================== */
+
+     .location-box{
+     padding:20px;
+
+     border:1px solid #dce5f3;
+
+     border-radius:18px;
+
+     background:#f9fbff;
+     }
+
+     .location-path{
+     margin-top:13px;
+
+     color:var(--muted);
+
+     font-size:13px;
+     }
+
+     .location-path strong{
+     color:var(--primary);
+     }
+
+
+     /* ========================================
+     CRIME CHIPS
+     ======================================== */
+
+     .crime-chips{
+     display:flex;
+
+     flex-wrap:wrap;
+
+     gap:10px;
+     }
+
+     .crime-chip{
+     padding:10px 15px;
+
+     border:1px solid var(--border);
+
+     border-radius:50px;
+
+     background:white;
+
+     color:#435066;
+
+     transition:.2s;
+     }
+
+     .crime-chip:hover{
+     border-color:#8eb5f5;
+     }
+
+     .crime-chip.active{
+     border-color:#78a9ff;
+
+     background:#eaf2ff;
+
+     color:var(--primary);
+
+     font-weight:800;
+     }
+
+     .other-crime{
+     display:none;
+
+     margin-top:14px;
+     }
+
+     .other-crime.show{
+     display:block;
+
+     animation:sectionIn .25s ease;
+     }
+
+
+     /* ========================================
+     UPLOAD
+     ======================================== */
+
+     .upload-box{
+     padding:30px 20px;
+
+     text-align:center;
+
+     border:2px dashed #b9c8df;
+
+     border-radius:18px;
+
+     background:#fafcff;
+
+     transition:.2s;
+     }
+
+     .upload-box.dragover{
+     border-color:#5790f0;
+
+     background:#edf5ff;
+     }
+
+     .upload-icon{
+     font-size:35px;
+
+     margin-bottom:8px;
+     }
+
+     .upload-title{
+     font-weight:800;
+     }
+
+     .upload-info{
+     margin-top:5px;
+
+     color:var(--muted);
+
+     font-size:12px;
+     }
+
+
+     /*
+     IMPORTANT FIX:
+     Label button is now explicitly clickable.
+     */
+
+     .upload-button{
+     display:inline-flex;
+
+     align-items:center;
+     justify-content:center;
+
+     margin-top:13px;
+
+     padding:11px 19px;
+
+     border-radius:11px;
+
+     background:var(--primary);
+
+     color:white;
+
+     font-weight:700;
+
+     cursor:pointer;
+
+     user-select:none;
+
+     transition:.2s;
+     }
+
+     .upload-button:hover{
+     background:var(--primary-dark);
+
+     transform:translateY(-1px);
+     }
+
+     .file-input{
+     position:absolute;
+
+     width:1px;
+     height:1px;
+
+     opacity:0;
+
+     pointer-events:none;
+     }
+
+
+     /* ========================================
+     FILE PREVIEW
+     ======================================== */
+
+     .file-list{
+     display:grid;
+
+     grid-template-columns:
+          repeat(
+               auto-fill,
+               minmax(180px,1fr)
+          );
+
+     gap:13px;
+
+     margin-top:16px;
+     }
+
+     .file-card{
+     position:relative;
+
+     padding:12px;
+
+     border:1px solid var(--border);
+
+     border-radius:15px;
+
+     background:white;
+     }
+
+     .file-card img{
+     width:100%;
+
+     height:110px;
+
+     object-fit:cover;
+
+     border-radius:10px;
+
+     margin-bottom:8px;
+     }
+
+     .file-icon{
+     height:110px;
+
+     display:flex;
+
+     align-items:center;
+
+     justify-content:center;
+
+     font-size:42px;
+     }
+
+     .file-name{
+     font-size:12px;
+
+     word-break:break-word;
+
+     color:#475467;
+     }
+
+     .file-size{
+     margin-top:3px;
+
+     color:var(--muted);
+
+     font-size:11px;
+     }
+
+     .remove-file{
+     position:absolute;
+
+     top:7px;
+     right:7px;
+
+     width:28px;
+     height:28px;
+
+     border:0;
+
+     border-radius:50%;
+
+     background:white;
+
+     color:#c62828;
+
+     box-shadow:0 3px 12px #0002;
+
+     z-index:2;
+     }
+
+
+     /* ========================================
+     TOGGLE
+     ======================================== */
+
+     .toggle-box{
+     display:flex;
+
+     align-items:center;
+
+     gap:12px;
+
+     padding:15px;
+
+     margin-top:18px;
+
+     border:1px solid var(--border);
+
+     border-radius:15px;
+
+     background:#fafcff;
+     }
+
+     .toggle-box input{
+     width:19px;
+     height:19px;
+
+     flex-shrink:0;
+     }
+
+     .reporter-fields{
+     display:none;
+
+     margin-top:18px;
+     }
+
+     .reporter-fields.show{
+     display:grid;
+     }
+
+
+     /* ========================================
+     BUTTONS
+     ======================================== */
+
+     .actions{
+     display:flex;
+
+     justify-content:space-between;
+
+     gap:12px;
+
+     margin-top:25px;
+     }
+
+     .btn{
+     border:0;
+
+     padding:13px 21px;
+
+     border-radius:13px;
+
+     font-weight:800;
+
+     transition:.2s;
+     }
+
+     .btn:hover{
+     transform:translateY(-1px);
+     }
+
+     .btn-back{
+     background:#edf0f5;
+
+     color:#344054;
+     }
+
+     .btn-next{
+     color:white;
+
+     background:
+          linear-gradient(
+               135deg,
+               var(--primary),
+               var(--primary-dark)
+          );
+     }
+
+     .btn-submit{
+     color:white;
+
+     background:
+          linear-gradient(
+               135deg,
+               var(--success),
+               #087c59
+          );
+     }
+
+
+     /* ========================================
+     REVIEW
+     ======================================== */
+
+     .review-grid{
+     display:grid;
+
+     grid-template-columns:
+          repeat(2,minmax(0,1fr));
+
+     gap:13px;
+     }
+
+     .review-item{
+     padding:14px;
+
+     border:1px solid var(--border);
+
+     border-radius:14px;
+
+     background:#fbfcfe;
+     }
+
+     .review-item span{
+     display:block;
+
+     margin-bottom:4px;
+
+     color:var(--muted);
+
+     font-size:12px;
+     }
+
+     .review-item strong{
+     line-height:1.6;
+
+     word-break:break-word;
+     }
+
+
+     /* ========================================
+     SUCCESS
+     ======================================== */
+
+     .success{
+     display:none;
+
+     text-align:center;
+
+     padding:45px 25px;
+     }
+
+     .success.show{
+     display:block;
+
+     animation:sectionIn .35s ease;
+     }
+
+     .success-icon{
+     font-size:55px;
+
+     margin-bottom:8px;
+     }
+
+     .reference{
+     display:inline-block;
+
+     margin:15px 0;
+
+     padding:10px 18px;
+
+     border-radius:10px;
+
+     background:#edf4ff;
+
+     color:var(--primary);
+
+     font-size:21px;
+
+     font-weight:900;
+
+     letter-spacing:.5px;
+     }
+
+
+     /* ========================================
+     INVALID
+     ======================================== */
+
+     .invalid{
+     border-color:#ef6b63 !important;
+
+     box-shadow:
+          0 0 0 4px #fff0ef !important;
+     }
+
+
+     /* ========================================
+     FOOTER
+     ======================================== */
+
+     footer{
+     padding:22px;
+
+     text-align:center;
+
+     color:#475467;
+
+     font-weight:700;
+     }
+
+
+     /* ========================================
+     RESPONSIVE
+     ======================================== */
+
+     @media(max-width:760px){
+
+     .container{
+          width:min(100% - 20px,1180px);
+     }
+
+     .hero{
+          padding:25px;
+
+          border-radius:21px;
+     }
+
+     .card{
+          padding:20px;
+     }
+
+     .form-grid,
+     .review-grid{
+          grid-template-columns:1fr;
+     }
+
+     .full{
+          grid-column:auto;
+     }
+
+     .stepper{
+          gap:5px;
+     }
+
+     .step{
+          padding:9px 4px;
+
+          font-size:11px;
+     }
+
+     .actions{
+          position:sticky;
+
+          bottom:8px;
+
+          z-index:10;
+
+          padding:10px;
+
+          border-radius:15px;
+
+          background:white;
+
+          box-shadow:0 8px 25px #0001;
+     }
+
+     }
+
+     </style>
+     </head>
+
+
+     <body>
+
+     <div class="container">
+
+
+     <!-- ========================================
+          HERO
+     ======================================== -->
+
+     <header class="hero">
+
+     <span class="hero-badge">
+          CITIZEN REPORTING • SMART FORM
+     </span>
+
+     <h1>
+          ঘটনা ও সংশ্লিষ্ট ব্যক্তির তথ্য প্রতিবেদন
+     </h1>
+
+     <p>
+          আপনি যে ঘটনা নিজে দেখেছেন অথবা বিশ্বাসযোগ্যভাবে
+          জেনেছেন, তার প্রাসঙ্গিক তথ্য প্রদান করুন।
+          একটি প্রতিবেদন দাখিল করলেই কোনো ব্যক্তি আইনগতভাবে
+          অপরাধী প্রমাণিত হন না। তথ্য যাচাই সাপেক্ষে
+          প্রয়োজনীয় ব্যবস্থা নেওয়া হবে।
+     </p>
+
+     </header>
+
+
+     <!-- ========================================
+          NOTICE
+     ======================================== -->
+
+     <div class="notice">
+
+     🔒 <strong>গুরুত্বপূর্ণ:</strong>
+
+     অপ্রয়োজনীয় ব্যক্তিগত, আর্থিক বা গোপনীয় তথ্য দেবেন না।
+     শুধুমাত্র আইনসম্মতভাবে পাওয়া তথ্য ও প্রমাণ সংযুক্ত করুন।
+     চাইলে প্রতিবেদকের পরিচয় গোপন রাখা যাবে।
+
+     </div>
+
+
+     <!-- ========================================
+          STEPPER
+     ======================================== -->
+
+     <div class="stepper">
+
+     <div class="step active">
+          ১<br>পরিচিতি
+     </div>
+
+     <div class="step">
+          ২<br>অবস্থান
+     </div>
+
+     <div class="step">
+          ৩<br>ঘটনা
+     </div>
+
+     <div class="step">
+          ৪<br>প্রমাণ
+     </div>
+
+     <div class="step">
+          ৫<br>পর্যালোচনা
+     </div>
+
+     </div>
+
+
+     <div class="progress">
+
+     <div
+          class="progress-bar"
+          id="progressBar"
+     ></div>
+
+     </div>
+
+
+     <!-- ========================================
+          FORM
+     ======================================== -->
+
+     <form
+     id="reportForm"
+     autocomplete="off"
+     >
+
+
+     <!-- ========================================
+          STEP 1
+     ======================================== -->
+
+     <section class="card form-section active">
+
+     <div class="section-header">
+
+          <div>
+
+               <h2>
+                    ১. সংশ্লিষ্ট ব্যক্তির পরিচিতি
+               </h2>
+
+               <p>
+                    আপনি যতটুকু নিশ্চিতভাবে জানেন,
+                    শুধুমাত্র ততটুকু তথ্য দিন।
+               </p>
+
+          </div>
+
+     </div>
+
+
+     <div class="form-grid">
+
+
+          <div class="form-group">
+
+               <label>
+                    পূর্ণ নাম
+               </label>
+
+               <input
+                    id="personName"
+                    class="form-control"
+                    type="text"
+                    placeholder="যে নামে পরিচিত"
+               >
+
+          </div>
+
+
+          <div class="form-group">
+
+               <label>
+                    ডাকনাম / পরিচিত নাম
+               </label>
+
+               <input
+                    id="nickname"
+                    class="form-control"
+                    type="text"
+                    placeholder="যদি থাকে"
+               >
+
+          </div>
+
+
+          <div class="form-group">
+
+               <label>
+                    আনুমানিক বয়স
+               </label>
+
+               <input
+                    id="age"
+                    class="form-control"
+                    type="number"
+                    min="1"
+                    max="120"
+                    placeholder="যেমন: ৩৫"
+               >
+
+          </div>
+
+
+          <div class="form-group">
+
+               <label>
+                    লিঙ্গ
+               </label>
+
+               <select
+                    id="gender"
+                    class="form-control"
+               >
+
+                    <option value="">
+                         নির্বাচন করুন
+                    </option>
+
+                    <option>পুরুষ</option>
+                    <option>নারী</option>
+                    <option>অন্যান্য</option>
+                    <option>জানা নেই</option>
+
+               </select>
+
+          </div>
+
+
+          <div class="form-group full">
+
+               <label>
+                    চেহারা / দৃশ্যমান বৈশিষ্ট্য
+               </label>
+
+               <textarea
+                    id="appearance"
+                    class="form-control"
+                    placeholder="উচ্চতা, গড়ন, পোশাক, চুল, দাড়ি ইত্যাদি—শুধু দৃশ্যমান ও প্রাসঙ্গিক তথ্য"
+               ></textarea>
+
+          </div>
+
+
+          <div class="form-group">
+
+               <label>
+                    পেশা / পরিচিত কর্মপরিচয়
+               </label>
+
+               <input
+                    id="profession"
+                    class="form-control"
+                    placeholder="যদি জানা থাকে"
+               >
+
+          </div>
+
+
+          <div class="form-group">
+
+               <label>
+                    কর্মস্থল / ব্যবসার স্থান
+               </label>
+
+               <input
+                    id="workplace"
+                    class="form-control"
+                    placeholder="যদি জানা থাকে"
+               >
+
+          </div>
+
+     </div>
+
+
+     <div class="actions">
+
+          <span></span>
+
+          <button
+               type="button"
+               class="btn btn-next"
+               onclick="nextStep()"
+          >
+               পরবর্তী →
+          </button>
+
+     </div>
+
+     </section>
+
+
+
+     <!-- ========================================
+          STEP 2
+     ======================================== -->
+
+     <section class="card form-section">
+
+     <div class="section-header">
+
+          <div>
+
+               <h2>
+                    ২. অবস্থান ও শনাক্তকরণ
+               </h2>
+
+               <p>
+                    বিভাগ → জেলা → থানা/উপজেলা
+                    ধারাবাহিকভাবে নির্বাচন করুন।
+               </p>
+
+          </div>
+
+     </div>
+
+
+     <div class="location-box">
+
+          <div class="form-grid">
+
+
+               <div class="form-group">
+
+                    <label>
+                         বিভাগ
+                         <span class="required">*</span>
+                    </label>
+
+                    <select
+                         id="division"
+                         class="form-control"
+                    >
+
+                         <option value="">
+                         বিভাগ নির্বাচন করুন
+                         </option>
+
+                    </select>
+
+               </div>
+
+
+               <div class="form-group">
+
+                    <label>
+                         জেলা
+                         <span class="required">*</span>
+                    </label>
+
+                    <select
+                         id="district"
+                         class="form-control"
+                         disabled
+                    >
+
+                         <option value="">
+                         আগে বিভাগ নির্বাচন করুন
+                         </option>
+
+                    </select>
+
+               </div>
+
+
+               <div class="form-group">
+
+                    <label>
+                         থানা / উপজেলা
+                         <span class="required">*</span>
+                    </label>
+
+                    <select
+                         id="upazila"
+                         class="form-control"
+                         disabled
+                    >
+
+                         <option value="">
+                         আগে জেলা নির্বাচন করুন
+                         </option>
+
+                    </select>
+
+               </div>
+
+
+               <div class="form-group">
+
+                    <label>
+                         এলাকা / মহল্লা / গ্রাম
+                    </label>
+
+                    <input
+                         id="area"
+                         class="form-control"
+                         placeholder="যেমন: বাজার, মহল্লা, গ্রাম"
+                    >
+
+               </div>
+
+          </div>
+
+
+          <div
+               class="location-path"
+               id="locationPath"
+          >
+               📍 নির্বাচিত অবস্থান:
+               <strong>
+                    এখনো নির্বাচন করা হয়নি
+               </strong>
+          </div>
+
+     </div>
+
+
+     <div
+          class="form-grid"
+          style="margin-top:18px"
+     >
+
+          <div class="form-group">
+
+               <label>
+                    সাধারণত কোথায় দেখা যায়?
+               </label>
+
+               <input
+                    id="seenAt"
+                    class="form-control"
+                    placeholder="যেমন: বাজার, দোকান, নির্দিষ্ট রাস্তা"
+               >
+
+          </div>
+
+
+          <div class="form-group">
+
+               <label>
+                    যানবাহনের তথ্য
+               </label>
+
+               <input
+                    id="vehicle"
+                    class="form-control"
+                    placeholder="গাড়ির ধরন/রং/নম্বর"
+               >
+
+          </div>
+
+
+          <div class="form-group full">
+
+               <label>
+                    পাবলিক সামাজিক যোগাযোগমাধ্যম / ওয়েবসাইট
+               </label>
+
+               <input
+                    id="social"
+                    class="form-control"
+                    type="url"
+                    placeholder="https://..."
+               >
+
+          </div>
+
+     </div>
+
+
+     <div class="actions">
+
+          <button
+               type="button"
+               class="btn btn-back"
+               onclick="previousStep()"
+          >
+               ← ফিরে যান
+          </button>
+
+
+          <button
+               type="button"
+               class="btn btn-next"
+               onclick="nextStep()"
+          >
+               পরবর্তী →
+          </button>
+
+     </div>
+
+     </section>
+
+
+
+     <!-- ========================================
+          STEP 3
+     ======================================== -->
+
+     <section class="card form-section">
+
+     <div class="section-header">
+
+          <div>
+
+               <h2>
+                    ৩. ঘটনার বিস্তারিত
+               </h2>
+
+               <p>
+                    ঘটনার ধরন, সময় ও বিস্তারিত বিবরণ দিন।
+               </p>
+
+          </div>
+
+     </div>
+
+
+     <div class="form-group">
+
+          <label>
+               অপরাধ / ঘটনার ধরন
+               <span class="required">*</span>
+          </label>
+
+
+          <div
+               class="crime-chips"
+               id="crimeChips"
+          >
+
+               <button
+                    type="button"
+                    class="crime-chip"
+                    data-crime="চুরি"
+               >
+                    চুরি
+               </button>
+
+               <button
+                    type="button"
+                    class="crime-chip"
+                    data-crime="ছিনতাই"
+               >
+                    ছিনতাই
+               </button>
+
+               <button
+                    type="button"
+                    class="crime-chip"
+                    data-crime="প্রতারণা"
+               >
+                    প্রতারণা
+               </button>
+
+               <button
+                    type="button"
+                    class="crime-chip"
+                    data-crime="চাঁদাবাজি"
+               >
+                    চাঁদাবাজি
+               </button>
+
+               <button
+                    type="button"
+                    class="crime-chip"
+                    data-crime="হামলা/মারামারি"
+               >
+                    হামলা / মারামারি
+               </button>
+
+               <button
+                    type="button"
+                    class="crime-chip"
+                    data-crime="মাদক-সংক্রান্ত"
+               >
+                    মাদক-সংক্রান্ত
+               </button>
+
+               <button
+                    type="button"
+                    class="crime-chip"
+                    data-crime="সাইবার অপরাধ"
+               >
+                    সাইবার অপরাধ
+               </button>
+
+               <button
+                    type="button"
+                    class="crime-chip"
+                    data-crime="জালিয়াতি"
+               >
+                    জালিয়াতি
+               </button>
+
+               <button
+                    type="button"
+                    class="crime-chip"
+                    data-crime="ভাঙচুর"
+               >
+                    ভাঙচুর
+               </button>
+
+               <button
+                    type="button"
+                    class="crime-chip"
+                    data-crime="অপহরণ"
+               >
+                    অপহরণ
+               </button>
+
+               <button
+                    type="button"
+                    class="crime-chip"
+                    data-crime="যৌন অপরাধ"
+               >
+                    যৌন অপরাধ
+               </button>
+
+               <button
+                    type="button"
+                    class="crime-chip"
+                    data-crime="হত্যাকাণ্ড"
+               >
+                    হত্যাকাণ্ড
+               </button>
+
+               <button
+                    type="button"
+                    class="crime-chip"
+                    data-crime="মানবপাচার"
+               >
+                    মানবপাচার
+               </button>
+
+               <button
+                    type="button"
+                    class="crime-chip"
+                    id="otherCrimeChip"
+                    data-crime="অন্যান্য"
+               >
+                    অন্যান্য
+               </button>
+
+          </div>
+
+
+          <div
+               class="other-crime"
+               id="otherCrimeBox"
+          >
+
+               <input
+                    id="otherCrime"
+                    class="form-control"
+                    placeholder="অপরাধ / ঘটনার নাম লিখুন"
+               >
+
+          </div>
+
+     </div>
+
+
+     <div
+          class="form-grid"
+          style="margin-top:20px"
+     >
+
+          <div class="form-group">
+
+               <label>
+                    ঘটনার তারিখ
+               </label>
+
+               <input
+                    id="incidentDate"
+                    class="form-control"
+                    type="date"
+               >
+
+          </div>
+
+
+          <div class="form-group">
+
+               <label>
+                    আনুমানিক সময়
+               </label>
+
+               <input
+                    id="incidentTime"
+                    class="form-control"
+                    type="time"
+               >
+
+          </div>
+
+
+          <div class="form-group full">
+
+               <label>
+                    ঘটনাস্থল
+               </label>
+
+               <input
+                    id="incidentLocation"
+                    class="form-control"
+                    placeholder="ঘটনাটি যেখানে ঘটেছে"
+               >
+
+          </div>
+
+
+          <div class="form-group full">
+
+               <label>
+                    ঘটনার বিস্তারিত বিবরণ
+                    <span class="required">*</span>
+               </label>
+
+               <textarea
+                    id="incidentDetails"
+                    class="form-control"
+                    placeholder="কী ঘটেছে, কখন, কোথায়, কীভাবে—নিজের জানা তথ্য নিরপেক্ষভাবে লিখুন।"
+               ></textarea>
+
+          </div>
+
+     </div>
+
+
+     <div class="actions">
+
+          <button
+               type="button"
+               class="btn btn-back"
+               onclick="previousStep()"
+          >
+               ← ফিরে যান
+          </button>
+
+          <button
+               type="button"
+               class="btn btn-next"
+               onclick="nextStep()"
+          >
+               পরবর্তী →
+          </button>
+
+     </div>
+
+     </section>
+
+
+
+     <!-- ========================================
+          STEP 4
+     ======================================== -->
+
+     <section class="card form-section">
+
+     <div class="section-header">
+
+          <div>
+
+               <h2>
+                    ৪. উৎস ও প্রমাণ
+               </h2>
+
+               <p>
+                    আপনার তথ্যের উৎস এবং প্রাসঙ্গিক প্রমাণ সংযুক্ত করুন।
+               </p>
+
+          </div>
+
+     </div>
+
+
+     <div class="form-grid">
+
+
+          <div class="form-group">
+
+               <label>
+                    তথ্যটি কীভাবে জানেন?
+               </label>
+
+               <select
+                    id="source"
+                    class="form-control"
+               >
+
+                    <option value="">
+                         নির্বাচন করুন
+                    </option>
+
+                    <option>
+                         আমি নিজে দেখেছি
+                    </option>
+
+                    <option>
+                         আমি ভুক্তভোগী
+                    </option>
+
+                    <option>
+                         আমি প্রত্যক্ষদর্শী
+                    </option>
+
+                    <option>
+                         ভুক্তভোগী / সাক্ষীর কাছ থেকে জেনেছি
+                    </option>
+
+                    <option>
+                         অনলাইনে প্রকাশিত তথ্য থেকে
+                    </option>
+
+                    <option>
+                         অন্যান্য
+                    </option>
+
+               </select>
+
+          </div>
+
+
+          <div class="form-group">
+
+               <label>
+                    প্রমাণের সংক্ষিপ্ত নোট
+               </label>
+
+               <input
+                    id="evidenceNote"
+                    class="form-control"
+                    placeholder="প্রমাণটি কী এবং কোথা থেকে এসেছে"
+               >
+
+          </div>
+
+
+          <div class="form-group full">
+
+               <label>
+                    ফাইল সংযুক্ত করুন
+               </label>
+
+
+               <div
+                    class="upload-box"
+                    id="uploadBox"
+               >
+
+                    <div class="upload-icon">
+                         📎
+                    </div>
+
+                    <div class="upload-title">
+                         ফাইল এখানে টেনে আনুন
+                    </div>
+
+                    <div class="upload-info">
+                         JPG, PNG, WEBP, PDF, MP4
+                         — সর্বোচ্চ 10MB/ফাইল
+                    </div>
+
+
+                    <!--
+                         IMPORTANT:
+                         এখানে label-এর for এবং input-এর id
+                         একই: fileInput
+                    -->
+
+                    <label
+                         for="fileInput"
+                         class="upload-button"
+                    >
+                         📁 ফাইল নির্বাচন করুন
+                    </label>
+
+
+                    <input
+                         id="fileInput"
+                         class="file-input"
+                         type="file"
+                         multiple
+                         accept="image/*,video/mp4,application/pdf"
+                    >
+
+               </div>
+
+
+               <div
+                    class="file-list"
+                    id="fileList"
+               ></div>
+
+          </div>
+
+     </div>
+
+
+     <!-- ========================================
+          ANONYMOUS
+     ======================================== -->
+
+     <div class="toggle-box">
+
+          <input
+               id="anonymous"
+               type="checkbox"
+          >
+
+          <div>
+
+               <strong>
+                    আমি পরিচয় গোপন রাখতে চাই
+               </strong>
+
+               <div class="help-text">
+                    প্রতিবেদকের পরিচয় গোপন রাখার অনুরোধ হিসেবে
+                    এই তথ্য সংরক্ষিত হবে।
+               </div>
+
+          </div>
+
+     </div>
+
+
+     <!-- ========================================
+          REPORTER INFORMATION
+     ======================================== -->
+
+     <div
+          class="reporter-fields form-grid"
+          id="reporterFields"
+     >
+
+          <div class="form-group">
+
+               <label>
+                    আপনার নাম
+               </label>
+
+               <input
+                    id="reporterName"
+                    class="form-control"
+                    placeholder="আপনার নাম"
+               >
+
+          </div>
+
+
+          <div class="form-group">
+
+               <label>
+                    মোবাইল
+               </label>
+
+               <input
+                    id="reporterPhone"
+                    class="form-control"
+                    inputmode="tel"
+                    placeholder="01XXXXXXXXX"
+               >
+
+          </div>
+
+
+          <div class="form-group full">
+
+               <label>
+                    ইমেইল
+               </label>
+
+               <input
+                    id="reporterEmail"
+                    class="form-control"
+                    type="email"
+                    placeholder="example@email.com"
+               >
+
+          </div>
+
+     </div>
+
+
+     <div class="actions">
+
+          <button
+               type="button"
+               class="btn btn-back"
+               onclick="previousStep()"
+          >
+               ← ফিরে যান
+          </button>
+
+          <button
+               type="button"
+               class="btn btn-next"
+               onclick="nextStep()"
+          >
+               পর্যালোচনা →
+          </button>
+
+     </div>
+
+     </section>
+
+
+
+     <!-- ========================================
+          STEP 5
+     ======================================== -->
+
+     <section class="card form-section">
+
+     <div class="section-header">
+
+          <div>
+
+               <h2>
+                    ৫. চূড়ান্ত পর্যালোচনা
+               </h2>
+
+               <p>
+                    দাখিলের আগে আপনার দেওয়া তথ্যগুলো যাচাই করুন।
+               </p>
+
+          </div>
+
+     </div>
+
+
+     <div
+          class="review-grid"
+          id="reviewGrid"
+     ></div>
+
+
+     <div class="toggle-box">
+
+          <input
+               id="consent"
+               type="checkbox"
+          >
+
+          <div>
+
+               <strong>
+                    ঘোষণা
+               </strong>
+
+               <div class="help-text">
+                    আমি জেনে-বুঝে এই তথ্য প্রদান করছি এবং
+                    ইচ্ছাকৃতভাবে মিথ্যা বা বিভ্রান্তিকর তথ্য
+                    প্রদান করছি না।
+               </div>
+
+          </div>
+
+     </div>
+
+
+     <div class="actions">
+
+          <button
+               type="button"
+               class="btn btn-back"
+               onclick="previousStep()"
+          >
+               ← ফিরে যান
+          </button>
+
+
+          <button
+               type="submit"
+               class="btn btn-submit"
+          >
+               ✓ প্রতিবেদন দাখিল করুন
+          </button>
+
+     </div>
+
+     </section>
+
+     </form>
+
+
+     <!-- ========================================
+          SUCCESS MESSAGE
+     ======================================== -->
+
+     <div
+     class="card success"
+     id="successBox"
+     >
+
+     <div class="success-icon">
+          ✅
+     </div>
+
+     <h2>
+          প্রতিবেদন দাখিল সম্পন্ন হয়েছে
+     </h2>
+
+     <p style="margin-top:8px;color:#667085;">
+          এটি একটি ডেমো প্রতিবেদন ব্যবস্থা।
+          আপনার দেওয়া কোনো তথ্য কোথাও পাঠানো বা সংরক্ষণ করা হয়নি।
+     </p>
+
+
+     <div
+          class="reference"
+          id="referenceNumber"
+     ></div>
+
+
+     <p style="color:#667085;">
+          এই Reference ID শুধুমাত্র প্রদর্শনের জন্য তৈরি করা হয়েছে।
+     </p>
+
+
+     <br>
+
+
+     <button
+          type="button"
+          class="btn btn-next"
+          onclick="location.reload()"
+     >
+          নতুন প্রতিবেদন
+     </button>
+
+     </div>
+
+
+     <!-- ========================================
+          FOOTER
+     ======================================== -->
+
+     <footer>
+     Created by Sojon Mia
+     </footer>
+
+
+     </div>
+
+
+
+     <script>
+
+     /* =====================================================
+     BANGLADESH LOCATION DATA
+     ===================================================== */
+
+     const locationData = {
+
+     "ঢাকা বিভাগ": {
+
+          "ঢাকা জেলা":[
+               "ধামরাই",
+               "দোহার",
+               "কেরানীগঞ্জ",
+               "নবাবগঞ্জ",
+               "সাভার"
+          ],
+
+          "গাজীপুর জেলা":[
+               "গাজীপুর সদর",
+               "কালিয়াকৈর",
+               "কালীগঞ্জ",
+               "কাপাসিয়া",
+               "শ্রীপুর"
+          ],
+
+          "নারায়ণগঞ্জ জেলা":[
+               "আড়াইহাজার",
+               "বন্দর",
+               "নারায়ণগঞ্জ সদর",
+               "রূপগঞ্জ",
+               "সোনারগাঁ"
+          ],
+
+          "নরসিংদী জেলা":[
+               "বেলাবো",
+               "মনোহরদী",
+               "নরসিংদী সদর",
+               "পলাশ",
+               "রায়পুরা",
+               "শিবপুর"
+          ],
+
+          "মানিকগঞ্জ জেলা":[
+               "ঘিওর",
+               "দৌলতপুর",
+               "মানিকগঞ্জ সদর",
+               "সাটুরিয়া",
+               "শিবালয়",
+               "সিংগাইর",
+               "হরিরামপুর"
+          ],
+
+          "মুন্সীগঞ্জ জেলা":[
+               "গজারিয়া",
+               "লৌহজং",
+               "মুন্সীগঞ্জ সদর",
+               "সিরাজদিখান",
+               "শ্রীনগর",
+               "টংগিবাড়ী"
+          ],
+
+          "টাঙ্গাইল জেলা":[
+               "বাসাইল",
+               "ভূঞাপুর",
+               "দেলদুয়ার",
+               "ধনবাড়ী",
+               "ঘাটাইল",
+               "গোপালপুর",
+               "কালিহাতী",
+               "মধুপুর",
+               "মির্জাপুর",
+               "নাগরপুর",
+               "সখিপুর",
+               "টাঙ্গাইল সদর"
+          ],
+
+          "ফরিদপুর জেলা":[
+               "আলফাডাঙ্গা",
+               "ভাঙ্গা",
+               "বোয়ালমারী",
+               "চরভদ্রাসন",
+               "ফরিদপুর সদর",
+               "মধুখালী",
+               "নগরকান্দা",
+               "সদরপুর",
+               "সালথা"
+          ]
+
+     },
+
+
+     "চট্টগ্রাম বিভাগ": {
+
+          "চট্টগ্রাম জেলা":[
+               "আনোয়ারা",
+               "বাঁশখালী",
+               "বোয়ালখালী",
+               "চন্দনাইশ",
+               "ফটিকছড়ি",
+               "হাটহাজারী",
+               "লোহাগাড়া",
+               "মীরসরাই",
+               "পটিয়া",
+               "রাঙ্গুনিয়া",
+               "রাউজান",
+               "সন্দ্বীপ",
+               "সাতকানিয়া",
+               "সীতাকুণ্ড",
+               "কর্ণফুলী"
+          ],
+
+          "কক্সবাজার জেলা":[
+               "চকরিয়া",
+               "কক্সবাজার সদর",
+               "কুতুবদিয়া",
+               "মহেশখালী",
+               "পেকুয়া",
+               "রামু",
+               "টেকনাফ",
+               "উখিয়া",
+               "ঈদগাঁও"
+          ],
+
+          "কুমিল্লা জেলা":[
+               "আদর্শ সদর",
+               "বরুড়া",
+               "ব্রাহ্মণপাড়া",
+               "বুড়িচং",
+               "চান্দিনা",
+               "চৌদ্দগ্রাম",
+               "দাউদকান্দি",
+               "দেবিদ্বার",
+               "হোমনা",
+               "লাকসাম",
+               "লালমাই",
+               "মেঘনা",
+               "মনোহরগঞ্জ",
+               "মুরাদনগর",
+               "নাঙ্গলকোট",
+               "তিতাস"
+          ],
+
+          "ফেনী জেলা":[
+               "ছাগলনাইয়া",
+               "দাগনভূঞা",
+               "ফেনী সদর",
+               "ফুলগাজী",
+               "পরশুরাম",
+               "সোনাগাজী"
+          ],
+
+          "নোয়াখালী জেলা":[
+               "বেগমগঞ্জ",
+               "চাটখিল",
+               "কোম্পানীগঞ্জ",
+               "হাতিয়া",
+               "কবিরহাট",
+               "সেনবাগ",
+               "সোনাইমুড়ী",
+               "সুবর্ণচর",
+               "নোয়াখালী সদর"
+          ]
+
+     },
+
+
+     "রাজশাহী বিভাগ": {
+
+          "রাজশাহী জেলা":[
+               "বাঘা",
+               "বাগমারা",
+               "চারঘাট",
+               "দুর্গাপুর",
+               "গোদাগাড়ী",
+               "মোহনপুর",
+               "পবা",
+               "পুঠিয়া",
+               "তানোর"
+          ],
+
+          "বগুড়া জেলা":[
+               "আদমদিঘি",
+               "বগুড়া সদর",
+               "ধুনট",
+               "দুপচাঁচিয়া",
+               "গাবতলী",
+               "কাহালু",
+               "নন্দিগ্রাম",
+               "সারিয়াকান্দি",
+               "শাজাহানপুর",
+               "শেরপুর",
+               "শিবগঞ্জ",
+               "সোনাতলা"
+          ],
+
+          "নাটোর জেলা":[
+               "বাগাতিপাড়া",
+               "বড়াইগ্রাম",
+               "গুরুদাসপুর",
+               "লালপুর",
+               "নাটোর সদর",
+               "নলডাঙ্গা",
+               "সিংড়া"
+          ],
+
+          "পাবনা জেলা":[
+               "আটঘরিয়া",
+               "বেড়া",
+               "ভাঙ্গুড়া",
+               "চাটমোহর",
+               "ফরিদপুর",
+               "ঈশ্বরদী",
+               "পাবনা সদর",
+               "সাঁথিয়া",
+               "সুজানগর"
+          ]
+
+     },
+
+
+     "খুলনা বিভাগ": {
+
+          "খুলনা জেলা":[
+               "বটিয়াঘাটা",
+               "দাকোপ",
+               "ডুমুরিয়া",
+               "দিঘলিয়া",
+               "কয়রা",
+               "পাইকগাছা",
+               "ফুলতলা",
+               "রূপসা",
+               "তেরখাদা"
+          ],
+
+          "যশোর জেলা":[
+               "অভয়নগর",
+               "বাঘারপাড়া",
+               "চৌগাছা",
+               "ঝিকরগাছা",
+               "কেশবপুর",
+               "যশোর সদর",
+               "মণিরামপুর",
+               "শার্শা"
+          ],
+
+          "কুষ্টিয়া জেলা":[
+               "ভেড়ামারা",
+               "দৌলতপুর",
+               "খোকসা",
+               "কুমারখালী",
+               "কুষ্টিয়া সদর",
+               "মিরপুর"
+          ],
+
+          "সাতক্ষীরা জেলা":[
+               "আশাশুনি",
+               "দেবহাটা",
+               "কলারোয়া",
+               "কালিগঞ্জ",
+               "সাতক্ষীরা সদর",
+               "শ্যামনগর",
+               "তালা"
+          ]
+
+     },
+
+
+     "বরিশাল বিভাগ": {
+
+          "বরিশাল জেলা":[
+               "আগৈলঝাড়া",
+               "বাবুগঞ্জ",
+               "বাকেরগঞ্জ",
+               "বানারীপাড়া",
+               "গৌরনদী",
+               "হিজলা",
+               "বরিশাল সদর",
+               "মেহেন্দিগঞ্জ",
+               "মুলাদী",
+               "উজিরপুর"
+          ],
+
+          "ভোলা জেলা":[
+               "ভোলা সদর",
+               "বোরহানউদ্দিন",
+               "দৌলতখান",
+               "লালমোহন",
+               "মনপুরা",
+               "তজুমদ্দিন"
+          ],
+
+          "পটুয়াখালী জেলা":[
+               "বাউফল",
+               "দশমিনা",
+               "দুমকি",
+               "কলাপাড়া",
+               "মির্জাগঞ্জ",
+               "পটুয়াখালী সদর",
+               "গলাচিপা",
+               "রাঙ্গাবালী"
+          ],
+
+          "পিরোজপুর জেলা":[
+               "ভান্ডারিয়া",
+               "কাউখালী",
+               "মঠবাড়ীয়া",
+               "নাজিরপুর",
+               "পিরোজপুর সদর",
+               "নেছারাবাদ",
+               "ইন্দুরকানী"
+          ]
+
+     },
+
+
+     "সিলেট বিভাগ": {
+
+          "সিলেট জেলা":[
+               "বালাগঞ্জ",
+               "বিয়ানীবাজার",
+               "বিশ্বনাথ",
+               "কোম্পানীগঞ্জ",
+               "দক্ষিণ সুরমা",
+               "ফেঞ্চুগঞ্জ",
+               "গোলাপগঞ্জ",
+               "গোয়াইনঘাট",
+               "জৈন্তাপুর",
+               "কানাইঘাট",
+               "সিলেট সদর",
+               "জকিগঞ্জ",
+               "ওসমানীনগর"
+          ],
+
+          "মৌলভীবাজার জেলা":[
+               "বড়লেখা",
+               "জুড়ী",
+               "কমলগঞ্জ",
+               "কুলাউড়া",
+               "মৌলভীবাজার সদর",
+               "রাজনগর",
+               "শ্রীমঙ্গল"
+          ],
+
+          "হবিগঞ্জ জেলা":[
+               "আজমিরীগঞ্জ",
+               "বাহুবল",
+               "বানিয়াচং",
+               "চুনারুঘাট",
+               "হবিগঞ্জ সদর",
+               "লাখাই",
+               "মাধবপুর",
+               "নবীগঞ্জ",
+               "শায়েস্তাগঞ্জ"
+          ],
+
+          "সুনামগঞ্জ জেলা":[
+               "বিশ্বম্ভরপুর",
+               "ছাতক",
+               "দিরাই",
+               "ধর্মপাশা",
+               "দোয়ারাবাজার",
+               "জগন্নাথপুর",
+               "জামালগঞ্জ",
+               "শাল্লা",
+               "সুনামগঞ্জ সদর",
+               "তাহিরপুর",
+               "শান্তিগঞ্জ",
+               "মধ্যনগর"
+          ]
+
+     },
+
+
+     "রংপুর বিভাগ": {
+
+          "রংপুর জেলা":[
+               "বদরগঞ্জ",
+               "কাউনিয়া",
+               "রংপুর সদর",
+               "মিঠাপুকুর",
+               "পীরগাছা",
+               "পীরগঞ্জ",
+               "তারাগঞ্জ",
+               "গংগাচড়া"
+          ],
+
+          "দিনাজপুর জেলা":[
+               "বিরামপুর",
+               "বীরগঞ্জ",
+               "বিরল",
+               "বোচাগঞ্জ",
+               "চিরিরবন্দর",
+               "ফুলবাড়ী",
+               "ঘোড়াঘাট",
+               "হাকিমপুর",
+               "কাহারোল",
+               "খানসামা",
+               "নবাবগঞ্জ",
+               "পার্বতীপুর",
+               "দিনাজপুর সদর"
+          ],
+
+          "কুড়িগ্রাম জেলা":[
+               "ভূরুঙ্গামারী",
+               "চর রাজিবপুর",
+               "চিলমারী",
+               "ফুলবাড়ী",
+               "কুড়িগ্রাম সদর",
+               "নাগেশ্বরী",
+               "রাজারহাট",
+               "রৌমারী",
+               "উলিপুর"
+          ],
+
+          "লালমনিরহাট জেলা":[
+               "আদিতমারী",
+               "হাতীবান্ধা",
+               "কালীগঞ্জ",
+               "লালমনিরহাট সদর",
+               "পাটগ্রাম"
+          ]
+
+     },
+
+
+     "ময়মনসিংহ বিভাগ": {
+
+          "ময়মনসিংহ জেলা":[
+               "ভালুকা",
+               "ধোবাউড়া",
+               "ফুলবাড়িয়া",
+               "গফরগাঁও",
+               "গৌরীপুর",
+               "হালুয়াঘাট",
+               "ঈশ্বরগঞ্জ",
+               "মুক্তাগাছা",
+               "ময়মনসিংহ সদর",
+               "নান্দাইল",
+               "ফুলপুর",
+               "তারাকান্দা",
+               "ত্রিশাল"
+          ],
+
+          "জামালপুর জেলা":[
+               "বকশীগঞ্জ",
+               "দেওয়ানগঞ্জ",
+               "ইসলামপুর",
+               "জামালপুর সদর",
+               "মাদারগঞ্জ",
+               "মেলান্দহ",
+               "সরিষাবাড়ী"
+          ],
+
+          "শেরপুর জেলা":[
+               "ঝিনাইগাতী",
+               "নকলা",
+               "নালিতাবাড়ী",
+               "শেরপুর সদর",
+               "শ্রীবরদী"
+          ],
+
+          "নেত্রকোণা জেলা":[
+               "আটপাড়া",
+               "বারহাট্টা",
+               "দুর্গাপুর",
+               "খালিয়াজুরী",
+               "কলমাকান্দা",
+               "কেন্দুয়া",
+               "মদন",
+               "মোহনগঞ্জ",
+               "নেত্রকোণা সদর",
+               "পূর্বধলা"
+          ]
+
+     }
+
+     };
+
+
+     /* =====================================================
+     LOCATION SYSTEM
+     ===================================================== */
+
+     const divisionSelect =
+     document.getElementById("division");
+
+     const districtSelect =
+     document.getElementById("district");
+
+     const upazilaSelect =
+     document.getElementById("upazila");
+
+     const areaInput =
+     document.getElementById("area");
+
+     const locationPath =
+     document.getElementById("locationPath");
+
+
+     /* LOAD DIVISIONS */
+
+     Object.keys(locationData).forEach(
+     division => {
+
+          const option =
+               document.createElement("option");
+
+          option.value = division;
+
+          option.textContent = division;
+
+          divisionSelect.appendChild(option);
+
+     }
+     );
+
+
+     /* DIVISION CHANGE */
+
+     divisionSelect.addEventListener(
+     "change",
+     function(){
+
+          districtSelect.innerHTML =
+               `<option value="">
+                    জেলা নির্বাচন করুন
+               </option>`;
+
+          upazilaSelect.innerHTML =
+               `<option value="">
+                    আগে জেলা নির্বাচন করুন
+               </option>`;
+
+          districtSelect.disabled =
+               !this.value;
+
+          upazilaSelect.disabled =
+               true;
+
+
+          if(!this.value){
+
+               updateLocationPath();
+
+               return;
+
+          }
+
+
+          Object.keys(
+               locationData[this.value]
+          ).forEach(
+               district => {
+
+                    const option =
+                         document.createElement("option");
+
+                    option.value =
+                         district;
+
+                    option.textContent =
+                         district;
+
+                    districtSelect.appendChild(
+                         option
+                    );
+
+               }
+          );
+
+
+          updateLocationPath();
+
+     }
+     );
+
+
+     /* DISTRICT CHANGE */
+
+     districtSelect.addEventListener(
+     "change",
+     function(){
+
+          upazilaSelect.innerHTML =
+               `<option value="">
+                    থানা / উপজেলা নির্বাচন করুন
+               </option>`;
+
+          upazilaSelect.disabled =
+               !this.value;
+
+
+          if(!this.value){
+
+               updateLocationPath();
+
+               return;
+
+          }
+
+
+          locationData[
+               divisionSelect.value
+          ][this.value].forEach(
+               upazila => {
+
+                    const option =
+                         document.createElement("option");
+
+                    option.value =
+                         upazila;
+
+                    option.textContent =
+                         upazila;
+
+                    upazilaSelect.appendChild(
+                         option
+                    );
+
+               }
+          );
+
+
+          updateLocationPath();
+
+     }
+     );
+
+
+     upazilaSelect.addEventListener(
+     "change",
+     updateLocationPath
+     );
+
+
+     areaInput.addEventListener(
+     "input",
+     updateLocationPath
+     );
+
+
+     function updateLocationPath(){
+
+     const values = [
+
+          divisionSelect.value,
+
+          districtSelect.value,
+
+          upazilaSelect.value,
+
+          areaInput.value.trim()
+
+     ].filter(Boolean);
+
+
+     locationPath.innerHTML =
+          `
+          📍 নির্বাচিত অবস্থান:
+
+          <strong>
+               ${
+                    values.length
+                    ? values.join(" → ")
+                    : "এখনো নির্বাচন করা হয়নি"
+               }
+          </strong>
+          `;
+
+     }
+
+
+     /* =====================================================
+     STEP SYSTEM
+     ===================================================== */
+
+     let currentStep = 0;
+
+
+     const sections =
+     document.querySelectorAll(
+          ".form-section"
+     );
+
+
+     const steps =
+     document.querySelectorAll(
+          ".step"
+     );
+
+
+     const progressBar =
+     document.getElementById(
+          "progressBar"
+     );
+
+
+     function showStep(index){
+
+     currentStep = index;
+
+
+     sections.forEach(
+          (section,i) => {
+
+               section.classList.toggle(
+                    "active",
+                    i === index
+               );
+
+          }
+     );
+
+
+     steps.forEach(
+          (step,i) => {
+
+               step.classList.toggle(
+                    "active",
+                    i === index
+               );
+
+               step.classList.toggle(
+                    "completed",
+                    i < index
+               );
+
+          }
+     );
+
+
+     progressBar.style.width =
+          ((index + 1) * 20) + "%";
+
+
+     window.scrollTo({
+          top:0,
+          behavior:"smooth"
+     });
+
+
+     if(index === 4){
+
+          generateReview();
+
+     }
+
+     }
+
+
+     /* =====================================================
+     VALIDATION
+     ===================================================== */
+
+     function validateStep(){
+
+     let valid = true;
+
+
+     /* LOCATION */
+
+     if(currentStep === 1){
+
+          const locationFields = [
+
+               divisionSelect,
+               districtSelect,
+               upazilaSelect
+
+          ];
+
+
+          locationFields.forEach(
+               field => {
+
+                    if(!field.value){
+
+                         field.classList.add(
+                         "invalid"
+                         );
+
+                         valid = false;
+
+                    }else{
+
+                         field.classList.remove(
+                         "invalid"
+                         );
+
+                    }
+
+               }
+          );
+
+     }
+
+
+     /* INCIDENT */
+
+     if(currentStep === 2){
+
+          const crimes =
+               getSelectedCrimes();
+
+
+          if(crimes.length === 0){
+
+               document
+                    .getElementById("crimeChips")
+                    .style.outline =
+                    "3px solid #ffe0dd";
+
+               valid = false;
+
+          }else{
+
+               document
+                    .getElementById("crimeChips")
+                    .style.outline =
+                    "";
+
+          }
+
+
+          const details =
+               document.getElementById(
+                    "incidentDetails"
+               );
+
+
+          if(!details.value.trim()){
+
+               details.classList.add(
+                    "invalid"
+               );
+
+               valid = false;
+
+          }else{
+
+               details.classList.remove(
+                    "invalid"
+               );
+
+          }
+
+
+          const otherSelected =
+               document
+                    .getElementById(
+                         "otherCrimeChip"
+                    )
+                    .classList.contains("active");
+
+
+          const otherCrime =
+               document.getElementById(
+                    "otherCrime"
+               );
+
+
+          if(
+               otherSelected &&
+               !otherCrime.value.trim()
+          ){
+
+               otherCrime.classList.add(
+                    "invalid"
+               );
+
+               valid = false;
+
+          }else{
+
+               otherCrime.classList.remove(
+                    "invalid"
+               );
+
+          }
+
+     }
+
+
+     /* REPORTER */
+
+     if(currentStep === 3){
+
+          const isAnonymous =
+               document.getElementById(
+                    "anonymous"
+               ).checked;
+
+
+          const reporterName =
+               document.getElementById(
+                    "reporterName"
+               );
+
+
+          if(
+               !isAnonymous &&
+               !reporterName.value.trim()
+          ){
+
+               reporterName.classList.add(
+                    "invalid"
+               );
+
+               valid = false;
+
+          }else{
+
+               reporterName.classList.remove(
+                    "invalid"
+               );
+
+          }
+
+     }
+
+
+     return valid;
+
+     }
+
+
+     function nextStep(){
+
+     if(!validateStep()){
+
+          return;
+
+     }
+
+
+     if(currentStep < 4){
+
+          showStep(
+               currentStep + 1
+          );
+
+     }
+
+     }
+
+
+     function previousStep(){
+
+     if(currentStep > 0){
+
+          showStep(
+               currentStep - 1
+          );
+
+     }
+
+     }
+
+
+     /* =====================================================
+     CRIME CHIPS
+     ===================================================== */
+
+     const crimeChips =
+     document.querySelectorAll(
+          ".crime-chip"
+     );
+
+
+     const otherCrimeChip =
+     document.getElementById(
+          "otherCrimeChip"
+     );
+
+
+     const otherCrimeBox =
+     document.getElementById(
+          "otherCrimeBox"
+     );
+
+
+     crimeChips.forEach(
+     chip => {
+
+          chip.addEventListener(
+               "click",
+               function(){
+
+                    this.classList.toggle(
+                         "active"
+                    );
+
+
+                    if(
+                         otherCrimeChip
+                         .classList
+                         .contains("active")
+                    ){
+
+                         otherCrimeBox.classList.add(
+                         "show"
+                         );
+
+                    }else{
+
+                         otherCrimeBox.classList.remove(
+                         "show"
+                         );
+
+
+                         document.getElementById(
+                         "otherCrime"
+                         ).value = "";
+
+                    }
+
+               }
+          );
+
+     }
+     );
+
+
+     function getSelectedCrimes(){
+
+     return [
+          ...document.querySelectorAll(
+               ".crime-chip.active"
+          )
+     ].map(
+          chip =>
+               chip.dataset.crime
+     );
+
+     }
+
+
+     /* =====================================================
+     ANONYMOUS REPORTER
+     ===================================================== */
+
+     const anonymous =
+     document.getElementById(
+          "anonymous"
+     );
+
+
+     const reporterFields =
+     document.getElementById(
+          "reporterFields"
+     );
+
+
+     anonymous.addEventListener(
+     "change",
+     function(){
+
+          reporterFields.classList.toggle(
+               "show",
+               !this.checked
+          );
+
+
+          if(this.checked){
+
+               document.getElementById(
+                    "reporterName"
+               ).value = "";
+
+               document.getElementById(
+                    "reporterPhone"
+               ).value = "";
+
+               document.getElementById(
+                    "reporterEmail"
+               ).value = "";
+
+          }
+
+     }
+     );
+
+
+     /* =====================================================
+     FILE UPLOAD
+     FIXED VERSION
+     ===================================================== */
+
+     const fileInput =
+     document.getElementById(
+          "fileInput"
+     );
+
+
+     const uploadBox =
+     document.getElementById(
+          "uploadBox"
+     );
+
+
+     const fileList =
+     document.getElementById(
+          "fileList"
+     );
+
+
+     let selectedFiles = [];
+
+
+     /*
+     Normal file selection
+     */
+
+     fileInput.addEventListener(
+     "change",
+     function(event){
+
+          addFiles(
+               event.target.files
+          );
+
+          /*
+               Allows selecting the same file again
+               after deleting it.
+          */
+
+          this.value = "";
+
+     }
+     );
+
+
+     /*
+     Drag & Drop
+     */
+
+     ["dragenter","dragover"].forEach(
+     eventName => {
+
+          uploadBox.addEventListener(
+               eventName,
+               function(event){
+
+                    event.preventDefault();
+
+                    event.stopPropagation();
+
+                    uploadBox.classList.add(
+                         "dragover"
+                    );
+
+               }
+          );
+
+     }
+     );
+
+
+     ["dragleave","drop"].forEach(
+     eventName => {
+
+          uploadBox.addEventListener(
+               eventName,
+               function(event){
+
+                    event.preventDefault();
+
+                    event.stopPropagation();
+
+                    uploadBox.classList.remove(
+                         "dragover"
+                    );
+
+               }
+          );
+
+     }
+     );
+
+
+     uploadBox.addEventListener(
+     "drop",
+     function(event){
+
+          const droppedFiles =
+               event.dataTransfer.files;
+
+          addFiles(
+               droppedFiles
+          );
+
+     }
+     );
+
+
+     /*
+     Add Files
+     */
+
+     function addFiles(files){
+
+     [...files].forEach(
+          file => {
+
+               /*
+                    Maximum 10MB
+               */
+
+               if(
+                    file.size >
+                    10 * 1024 * 1024
+               ){
+
+                    alert(
+                         file.name +
+                         " — ফাইলের আকার 10MB-এর বেশি।"
+                    );
+
+                    return;
+
+               }
+
+
+               /*
+                    Allowed file types
+               */
+
+               const validType =
+
+                    file.type.startsWith(
+                         "image/"
+                    )
+
+                    ||
+
+                    file.type ===
+                    "video/mp4"
+
+                    ||
+
+                    file.type ===
+                    "application/pdf";
+
+
+               if(!validType){
+
+                    alert(
+                         file.name +
+                         " — এই ফাইল টাইপ সমর্থিত নয়।"
+                    );
+
+                    return;
+
+               }
+
+
+               /*
+                    Duplicate prevention
+               */
+
+               const alreadyExists =
+                    selectedFiles.some(
+                         existing =>
+                         existing.name ===
+                         file.name
+                         &&
+                         existing.size ===
+                         file.size
+                    );
+
+
+               if(alreadyExists){
+
+                    return;
+
+               }
+
+
+               selectedFiles.push(
+                    file
+               );
+
+          }
+     );
+
+
+     renderFiles();
+
+     }
+
+
+     /*
+     Render File Cards
+     */
+
+     function renderFiles(){
+
+     fileList.innerHTML = "";
+
+
+     selectedFiles.forEach(
+          (file,index) => {
+
+               const card =
+                    document.createElement(
+                         "div"
+                    );
+
+
+               card.className =
+                    "file-card";
+
+
+               let preview = "";
+
+
+               /*
+                    Image Preview
+               */
+
+               if(
+                    file.type.startsWith(
+                         "image/"
+                    )
+               ){
+
+                    const url =
+                         URL.createObjectURL(
+                         file
+                         );
+
+
+                    preview =
+                         `
+                         <img
+                         src="${url}"
+                         alt="Uploaded file"
+                         >
+                         `;
+
+               }
+
+
+               /*
+                    PDF / Video
+               */
+
+               else{
+
+                    preview =
+                         `
+                         <div class="file-icon">
+                         ${
+                              file.type ===
+                              "video/mp4"
+                              ? "🎬"
+                              : "📄"
+                         }
+                         </div>
+                         `;
+
+               }
+
+
+               card.innerHTML =
+                    `
+
+                    ${preview}
+
+                    <button
+                         type="button"
+                         class="remove-file"
+                         data-index="${index}"
+                         aria-label="ফাইল মুছে ফেলুন"
+                    >
+                         ×
+                    </button>
+
+                    <div class="file-name">
+                         ${escapeHTML(file.name)}
+                    </div>
+
+                    <div class="file-size">
+                         ${formatFileSize(file.size)}
+                    </div>
+
+                    `;
+
+
+               fileList.appendChild(
+                    card
+               );
+
+          }
+     );
+
+
+     /*
+          Remove buttons
+     */
+
+     document
+          .querySelectorAll(
+               ".remove-file"
+          )
+          .forEach(
+               button => {
+
+                    button.addEventListener(
+                         "click",
+                         function(){
+
+                         const index =
+                              Number(
+                                   this.dataset.index
+                              );
+
+
+                         selectedFiles.splice(
+                              index,
+                              1
+                         );
+
+
+                         renderFiles();
+
+                         }
+                    );
+
+               }
+          );
+
+     }
+
+
+     /*
+     File size formatter
+     */
+
+     function formatFileSize(bytes){
+
+     if(bytes < 1024){
+
+          return bytes + " B";
+
+     }
+
+
+     if(bytes < 1024 * 1024){
+
+          return (
+               bytes / 1024
+          ).toFixed(1) + " KB";
+
+     }
+
+
+     return (
+          bytes /
+          (1024 * 1024)
+     ).toFixed(1) + " MB";
+
+     }
+
+
+     /*
+     Prevent HTML injection in filename
+     */
+
+     function escapeHTML(text){
+
+     return text
+          .replaceAll("&","&amp;")
+          .replaceAll("<","&lt;")
+          .replaceAll(">","&gt;")
+          .replaceAll('"',"&quot;")
+          .replaceAll("'","&#039;");
+
+     }
+
+
+     /* =====================================================
+     REVIEW
+     ===================================================== */
+
+     function getValue(id){
+
+     const element =
+          document.getElementById(id);
+
+
+     if(!element){
+
+          return "—";
+
+     }
+
+
+     return (
+          element.value.trim()
+          ||
+          "—"
+     );
+
+     }
+
+
+     function generateReview(){
+
+     let crimes =
+          getSelectedCrimes();
+
+
+     /*
+          Replace "অন্যান্য"
+          with custom crime
+     */
+
+     if(
+          crimes.includes("অন্যান্য")
+     ){
+
+          const other =
+               getValue(
+                    "otherCrime"
+               );
+
+
+          crimes =
+               crimes.map(
+                    crime =>
+
+                         crime === "অন্যান্য"
+                         ? other
+                         : crime
+               );
+
+     }
+
+
+     const location = [
+
+          divisionSelect.value,
+
+          districtSelect.value,
+
+          upazilaSelect.value,
+
+          areaInput.value.trim()
+
+     ]
+     .filter(Boolean)
+     .join(" → ");
+
+
+     const reviewData = [
+
+          [
+               "সংশ্লিষ্ট ব্যক্তির নাম",
+               getValue("personName")
+          ],
+
+          [
+               "ডাকনাম",
+               getValue("nickname")
+          ],
+
+          [
+               "আনুমানিক বয়স",
+               getValue("age")
+          ],
+
+          [
+               "লিঙ্গ",
+               getValue("gender")
+          ],
+
+          [
+               "অবস্থান",
+               location || "—"
+          ],
+
+          [
+               "ঘটনার ধরন",
+               crimes.join(", ") || "—"
+          ],
+
+          [
+               "ঘটনার তারিখ",
+               getValue("incidentDate")
+          ],
+
+          [
+               "ঘটনার সময়",
+               getValue("incidentTime")
+          ],
+
+          [
+               "ঘটনাস্থল",
+               getValue("incidentLocation")
+          ],
+
+          [
+               "ঘটনার বিবরণ",
+               getValue("incidentDetails")
+          ],
+
+          [
+               "তথ্যের উৎস",
+               getValue("source")
+          ],
+
+          [
+               "প্রমাণের নোট",
+               getValue("evidenceNote")
+          ],
+
+          [
+               "সংযুক্ত ফাইল",
+               selectedFiles.length + "টি"
+          ],
+
+          [
+               "প্রতিবেদকের পরিচয়",
+               anonymous.checked
+               ? "গোপন"
+               : "প্রকাশিত"
+          ]
+
+     ];
+
+
+     document.getElementById(
+          "reviewGrid"
+     ).innerHTML =
+
+          reviewData.map(
+               item =>
+
+                    `
+                    <div class="review-item">
+
+                         <span>
+                         ${item[0]}
+                         </span>
+
+                         <strong>
+                         ${escapeHTML(
+                              String(item[1])
+                         )}
+                         </strong>
+
+                    </div>
+                    `
+
+          ).join("");
+
+     }
+
+
+     /* =====================================================
+     FINAL SUBMIT
+     ===================================================== */
+
+     /*
+     IMPORTANT:
+
+     এই submit handler কোনো fetch(),
+     AJAX, API বা server request করছে না।
+
+     অর্থাৎ কোনো তথ্য কোথাও পাঠানো হবে না।
+
+     শুধু success message দেখানো হবে।
+     */
+
+     document
+     .getElementById("reportForm")
+     .addEventListener(
+          "submit",
+          function(event){
+
+               /*
+                    Browser-এর default form submission
+                    সম্পূর্ণভাবে বন্ধ করা হচ্ছে।
+               */
+
+               event.preventDefault();
+
+               event.stopPropagation();
+
+
+               /*
+                    Consent check
+               */
+
+               const consent =
+                    document.getElementById(
+                         "consent"
+                    );
+
+
+               if(!consent.checked){
+
+                    alert(
+                         "প্রতিবেদন দাখিল করার আগে ঘোষণায় সম্মতি দিন।"
+                    );
+
+                    return;
+
+               }
+
+
+               /*
+                    Demo Reference ID
+               */
+
+               const reference =
+
+                    "REF-" +
+
+                    new Date()
+                         .toISOString()
+                         .slice(0,10)
+                         .replaceAll("-","") +
+
+                    "-" +
+
+                    Math.random()
+                         .toString(36)
+                         .substring(2,8)
+                         .toUpperCase();
+
+
+               /*
+                    Hide form
+               */
+
+               this.style.display =
+                    "none";
+
+
+               /*
+                    Show success message
+               */
+
+               const successBox =
+                    document.getElementById(
+                         "successBox"
+                    );
+
+
+               successBox.classList.add(
+                    "show"
+               );
+
+
+               /*
+                    Show reference ID
+               */
+
+               document.getElementById(
+                    "referenceNumber"
+               ).textContent =
+                    reference;
+
+
+               /*
+                    Scroll top
+               */
+
+               window.scrollTo({
+                    top:0,
+                    behavior:"smooth"
+               });
+
+          }
+     );
+
+
+     /* =====================================================
+     INITIALIZE
+     ===================================================== */
+
+     showStep(0);
+
+     </script>
+
+     </body>
+     </html>
